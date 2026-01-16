@@ -31,10 +31,10 @@ void TurnManager::advance() {
     std::lock_guard<std::mutex> lock(mtx_);
 
     // Advance number
-    number_++;
+    number_++;  
     if (number_ > maxNumber_) {
         finished_ = true;
-        cv_.notify_all();
+        cv_.notify_all(); // Notify all waiting players that the game is finished
         return;
     }
 
