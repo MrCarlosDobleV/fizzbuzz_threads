@@ -34,20 +34,15 @@ The game is configured via `GameConfig`
 1. Default config with players and 3/5 rules.
 2. Custom config with players and 2/7 rules.
 
-## Example output
 
-```text
-Abdul says 1
-Bart says 2
-Claudia says fizz!
-Divya says 4
-Abdul says buzz!
-```
 
 ## Project layout
 - `include/` public headers
 - `src/` implementation
 - `CMakeLists.txt` build configuration
+- `build/` build output     
+- `README.md` this file
+- `images/` UML diagrams
 
 ## Notes
 - Output order is deterministic because turns are synchronized; threads only print when `TurnManager` grants their turn.
@@ -66,3 +61,78 @@ Abdul says buzz!
 ## Sequence Diagram
 
 ![Sequence Diagram](images/sequence_diagram.png)
+
+
+## Example output
+
+```text
+Abdul says 1
+Bart says 2
+Claudia says fizz!
+Divya says 4
+Abdul says buzz!
+Bart says fizz!
+Claudia says 7
+Divya says 8
+Abdul says fizz!
+Bart says buzz!
+Claudia says 11
+Divya says fizz!
+Abdul says 13
+Bart says 14
+Claudia says fizzbuzz!
+Divya says 16
+Abdul says 17
+Bart says fizz!
+Claudia says 19
+Divya says buzz!
+Abdul says fizz!
+Bart says 22
+Claudia says 23
+Divya says fizz!
+Abdul says buzz!
+Bart says 26
+Claudia says fizz!
+Divya says 28
+Abdul says 29
+Bart says fizzbuzz!
+```
+
+## Output for this configuration
+
+```Code          
+       GameConfig config;
+       config.players = {"Ana","Luis","Sofi"};
+       config.rules = {{2,"foo"},{7,"bar"}};
+       config.maxNumber = 25;
+
+       FizzBuzzGame game(config);
+       game.run();
+```
+
+```text
+Ana says 1
+Luis says foo!
+Sofi says 3
+Ana says foo!
+Luis says 5
+Sofi says foo!
+Ana says bar!
+Luis says foo!
+Sofi says 9
+Ana says foo!
+Luis says 11
+Sofi says foo!
+Ana says 13
+Luis says foobar!
+Sofi says 15
+Ana says foo!
+Luis says 17
+Sofi says foo!
+Ana says 19
+Luis says foo!
+Sofi says bar!
+Ana says foo!
+Luis says 23
+Sofi says foo!
+Ana says 25
